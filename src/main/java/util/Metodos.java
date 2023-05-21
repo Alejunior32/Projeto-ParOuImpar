@@ -15,4 +15,13 @@ public class Metodos {
         return Modo.ESCOLHA_INVALIDA;
     }
 
+    public static int parseToInt (String string) throws Exception {
+        int numeroConvertido;
+        try {
+            numeroConvertido = Integer.parseInt(string);
+        } catch (Exception exception) {
+            throw new Exception();
+        }
+        return numeroConvertido;
+    }
 }
