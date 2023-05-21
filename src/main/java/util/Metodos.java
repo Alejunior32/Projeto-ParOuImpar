@@ -15,6 +15,20 @@ public class Metodos {
         return Modo.ESCOLHA_INVALIDA;
     }
 
+
+    public ImparOuPar escolherImparOuPar(Scanner scanner) {
+
+        String resposta = scanner.nextLine();
+        if (resposta.equalsIgnoreCase("1"))
+            return ImparOuPar.IMPAR;
+        else if (resposta.equalsIgnoreCase("2"))
+            return ImparOuPar.PAR;
+
+        return ImparOuPar.ESCOLHA_INVALIDA;
+    }
+
+
+
     public static int parseToInt (String string) throws Exception {
         int numeroConvertido;
         try {
@@ -24,4 +38,5 @@ public class Metodos {
         }
         return numeroConvertido;
     }
+
 }
