@@ -1,5 +1,7 @@
 package client;
 
+import util.ConfiguracoesJogador;
+import util.ImparOuPar;
 import util.Metodos;
 import util.Modo;
 
@@ -28,25 +30,33 @@ public class Jogador{
             Scanner scannerEntrada = new Scanner(System.in);
 
             System.out.println("""
-            Escolha a modalidades de jogo:
+                Escolha a modalidades de jogo:
             
-            1. Jogador Vs CPU
-            2. Jogador Vs Jogador
-            """);
+                1. Jogador Vs CPU
+                2. Jogador Vs Jogador
+                 """);
 
             Modo modoJogo  = metodos.escolhaModoJogo(scannerEntrada);
-            saidaJogador.writeObject(modoJogo);
 
-//            System.out.println("""
-//            Escolha Impar ou Par:
-//
-//            1. Impar
-//            2. Par
-//
-//            """);
+            System.out.println("""
+                    Escolha entre Ímpar ou Par:
+                    
+                    1. Ímpar
+                    2. Par
+                    """);
 
+            ImparOuPar imparOuPar = metodos.escolherImparOuPar(scannerEntrada);
 
-        } catch (IOException e) {
+            System.out.println("Digite um número entre 0 e 5: ");
+            int numero = scannerEntrada.nextInt();
+
+            ConfiguracoesJogador configuracoesJogador = new ConfiguracoesJogador(modoJogo,imparOuPar,numero);
+            saidaJogador.writeObject(configuracoesJogador);
+
+            String resultado = (String) entradaServidor.readObject();
+            System.out.println(resultado);
+
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

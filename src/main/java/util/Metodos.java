@@ -15,4 +15,28 @@ public class Metodos {
         return Modo.ESCOLHA_INVALIDA;
     }
 
+<<<<<<< Updated upstream
+=======
+    public ImparOuPar escolherImparOuPar(Scanner scanner) {
+
+        String resposta = scanner.nextLine();
+        if (resposta.equalsIgnoreCase("1"))
+            return ImparOuPar.IMPAR;
+        else if (resposta.equalsIgnoreCase("2"))
+            return ImparOuPar.PAR;
+
+        return ImparOuPar.ESCOLHA_INVALIDA;
+    }
+
+
+    public static int parseToInt (String string) throws Exception {
+        int numeroConvertido;
+        try {
+            numeroConvertido = Integer.parseInt(string);
+        } catch (Exception exception) {
+            throw new Exception();
+        }
+        return numeroConvertido;
+    }
+>>>>>>> Stashed changes
 }
