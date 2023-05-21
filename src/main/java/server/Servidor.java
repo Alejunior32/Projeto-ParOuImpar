@@ -24,25 +24,31 @@ public class Servidor {
 
         while(true){
 
-            Socket socketCliente = serverSocket.accept();
+            Socket socketJogador1 = serverSocket.accept();
 
-            ObjectInputStream respostaCliente = new ObjectInputStream(socketCliente.getInputStream());
-            ObjectOutputStream mensagemDeSaida = new ObjectOutputStream(socketCliente.getOutputStream());
+            ObjectInputStream respostaCliente = new ObjectInputStream(socketJogador1.getInputStream());
+            ObjectOutputStream mensagemDeSaida = new ObjectOutputStream(socketJogador1.getOutputStream());
 
             mensagemDeSaida.writeObject(MENU_ESCOLHA);
             String escolha = (String) respostaCliente.readObject();
 
-            ThreadCpu threadCpu = new ThreadCpu();
-            ThreadJogador threadJogador = new ThreadJogador();
-
             if (escolha.equals("1")) {
+
                 mensagemDeSaida.writeObject("Modo de jogo 1 selecionado.");
+                ThreadCpu threadCpu = new ThreadCpu(socketJogador1);
                 threadCpu.start();
+
             } else if (escolha.equals("2")) {
+
                 mensagemDeSaida.writeObject("Modo de jogo 2 selecionado.");
+                mensagemDeSaida.writeObject("Esperando 2° Jogador ...");
+                Socket socketJogador2 = serverSocket.accept();
+                ThreadJogador threadJogador = new ThreadJogador(socketJogador1,socketJogador2);
                 threadJogador.start();
+
             } else {
                 mensagemDeSaida.writeObject("Resposta inválida.");
+                socketJogador1.close();
             }
 
 
