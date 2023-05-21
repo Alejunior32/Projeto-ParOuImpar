@@ -5,15 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ThreadJogador extends Thread{
+public class ThreadJogador extends Thread {
 
     Socket jogador1;
     Socket jogador2;
 
-    public ThreadJogador(Socket jogador1, Socket jogador2) {
-        this.jogador1 = jogador1;
-        this.jogador2 = jogador2;
-    }
+
+
 
     public void escolhaImparOuPar(ObjectOutputStream saidaJogador1,ObjectInputStream entradaJogador1,
                                   ObjectOutputStream saidaJogador2) throws IOException, ClassNotFoundException {
