@@ -1,5 +1,7 @@
 # Projeto-ParOuImpar
 
+![image](https://github.com/Alejunior32/Projeto-ParOuImpar/assets/58342856/e3854bc7-4244-436e-b598-bee0b6806945)
+
 ## Alexandre Freire Ropero Júnior RA: 125111375230
 ## Guilherme dos Reis Freitas RA: 125111356415
 ## Pedro Trindade Francisco RA: 125111346772
@@ -10,13 +12,10 @@ Par ou Ímpar é uma brincadeira de recreação para crianças, mas muitas vezes
 
 Faça um programa distribuído em Java, onde seja possível duas modalidades de jogos:
 
-- Jogador Vs CPU: o jogador será o usuário do programa e o outro um computador (servidor) que
-irá escolher de maneira aleatória um valor entre 0 e 5, inclusive.
-- Jogador Vs Jogador: Serão dois jogadores conectados cada um em uma máquina jogando um
-contra o outro.
-O programa deve determinar sempre quem foi o vencedor entre o usuário e o computador ou entre os
-dois jogadores, e informar aos usuários em cada rodada e ao finalizar a parda o número de vitórias e
-derrotas de cada jogador.
-O programa deve ficar em execução até que seja escolhido pelo usuário encerrar. Para terminar o
-programa, será necessário decidir um critério para fazê-lo parar. Isso fica livre para o grupo decidir como
-fazer
+- Jogador Vs CPU: o jogador será o usuário do programa e o outro um computador (servidor) queirá escolher de maneira aleatória um valor entre 0 e 5, inclusive.  
+- Jogador Vs Jogador: Serão dois jogadores conectados cada um em uma máquina jogando umcontra o outro.  
+
+O programa deve determinar sempre quem foi o vencedor entre o usuário e o computador ou entre os dois jogadores, e informar aos usuários em cada rodada e ao finalizar a parda o número de vitórias e derrotas de cada jogador.  
+
+O programa deve ficar em execução até que seja escolhido pelo usuário encerrar. Para terminar o programa, será necessário decidir um critério para fazê-lo parar. Isso fica livre para o grupo decidir como fazer
+
