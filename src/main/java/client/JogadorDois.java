@@ -11,9 +11,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Jogador{
+public class JogadorDois {
 
-    final static int PORTA = 8080;
+
+
+    final static int PORTA = 8081;
     final static String HOST = "localhost";
 
 
@@ -29,31 +31,16 @@ public class Jogador{
 
             Scanner scannerEntrada = new Scanner(System.in);
 
-            System.out.println("""
-                Escolha a modalidades de jogo:
-            
-                1. Jogador Vs CPU
-                2. Jogador Vs Jogador
-                 """);
+            ImparOuPar imparOuParJogador1 = (ImparOuPar) entradaServidor.readObject();
+            ImparOuPar imparOuParJogador2 = metodos.imparOuParJogador2(imparOuParJogador1);
 
-            Modo modoJogo  = metodos.escolhaModoJogo(scannerEntrada);
-            saidaJogador.writeObject(modoJogo);
+            System.out.println("Você é o jogador 2 e ficará com " + imparOuParJogador2 + "\n");
 
-            System.out.println("Você é o jogador 1" + "\n");
-
-            System.out.println("""
-                    Escolha entre Ímpar ou Par:
-                    
-                    1. Ímpar
-                    2. Par
-                    """);
-
-            ImparOuPar imparOuPar = metodos.escolherImparOuPar(scannerEntrada);
 
             System.out.println("Digite um número entre 0 e 5: ");
             int numero = scannerEntrada.nextInt();
 
-            ConfiguracoesJogador configuracoesJogador = new ConfiguracoesJogador(imparOuPar,numero);
+            ConfiguracoesJogador configuracoesJogador = new ConfiguracoesJogador(imparOuParJogador2,numero);
             saidaJogador.writeObject(configuracoesJogador);
 
             String resultado = (String) entradaServidor.readObject();
@@ -64,7 +51,4 @@ public class Jogador{
         }
 
     }
-
-
-
 }

@@ -27,6 +27,15 @@ public class Metodos {
         return ImparOuPar.ESCOLHA_INVALIDA;
     }
 
+    public ImparOuPar imparOuParJogador2(ImparOuPar imparOuParJogador1){
+
+        if (imparOuParJogador1 == ImparOuPar.IMPAR)
+            return ImparOuPar.PAR;
+
+        return ImparOuPar.IMPAR;
+
+    }
+
 
 
     public static int parseToInt (String string) throws Exception {

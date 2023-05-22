@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 public class ConfiguracoesJogador implements Serializable {
 
-    Modo modo;
+
     ImparOuPar imparOuPar;
     int numero;
 
-    public ConfiguracoesJogador(Modo modo, ImparOuPar imparOuPar, int numero) {
-        this.modo = modo;
+    public ConfiguracoesJogador(ImparOuPar imparOuPar, int numero) {
         this.imparOuPar = imparOuPar;
         this.numero = numero;
     }
@@ -22,7 +21,5 @@ public class ConfiguracoesJogador implements Serializable {
         return numero;
     }
 
-    public Modo getModo() {
-        return modo;
-    }
+
 }
