@@ -2,8 +2,17 @@ package util;
 
 import java.util.Scanner;
 
+/**
+ * Esta classe contém todos os métodos utilizados pelas classes Jogador e JogadorDois. São importantes para deixar o código mais legível.
+ */
 public class Metodos {
 
+    /**
+     * Escolhe o modo de jogo.
+     *
+     * @param scanner o objeto Scanner para leitura da informação passada pelo usuário.
+     * @return um enum do tipo Modo representando o modo de jogo escolhido.
+     */
     public Modo escolhaModoJogo(Scanner scanner){
 
         String escolha = scanner.nextLine();
@@ -16,6 +25,12 @@ public class Metodos {
     }
 
 
+    /**
+     * Escolhe ímpar ou par.
+     *
+     * @param scanner o objeto Scanner para leitura da informação passada pelo usuário.
+     * @return um enum do tipo ImparOuPar representando a escolha ímpar ou par.
+     */
     public ImparOuPar escolherImparOuPar(Scanner scanner) {
 
         String resposta = scanner.nextLine();
@@ -27,6 +42,12 @@ public class Metodos {
         return ImparOuPar.ESCOLHA_INVALIDA;
     }
 
+    /**
+     * Escolhe ímpar ou par.
+     *
+     * @param imparOuParJogador1 a escolha do jogador 1 do tipo ImparOuPar.
+     * @return um enum do tipo ImparOuPar representando a escolha ímpar ou par do jogador 2.
+     */
     public ImparOuPar imparOuParJogador2(ImparOuPar imparOuParJogador1){
 
         if (imparOuParJogador1 == ImparOuPar.IMPAR)
@@ -34,18 +55,6 @@ public class Metodos {
 
         return ImparOuPar.IMPAR;
 
-    }
-
-
-
-    public static int parseToInt (String string) throws Exception {
-        int numeroConvertido;
-        try {
-            numeroConvertido = Integer.parseInt(string);
-        } catch (Exception exception) {
-            throw new Exception();
-        }
-        return numeroConvertido;
     }
 
 }

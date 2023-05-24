@@ -11,14 +11,26 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Classe que representa o jogador dois (cliente) do jogo.
+ */
 public class JogadorDois {
 
-
-
+    /**
+     * Porta do servidor.
+     */
     final static int PORTA = 8081;
+    /**
+     * Endereço do servidor.
+     */
     final static String HOST = "localhost";
 
 
+    /**
+     * Método principal que inicia o jogador dois.
+     *
+     * @param args Argumentos de linha de comando.
+     */
     public static void main(String[] args) {
 
         try {

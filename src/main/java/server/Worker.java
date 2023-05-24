@@ -11,58 +11,85 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 
+/**
+ * Classe Worker responsável por lidar com as requisições de jogadores no servidor.
+ * Cada instância dessa classe é uma thread separada que lida com uma conexão de jogador.
+ */
 public class Worker extends Thread {
 
-    Socket socket;
-    Socket socketJogador2;
+    private final Socket socketJogador1;
 
-    public Worker(Socket socket,Socket socketJogador2) {
-        this.socket = socket;
-        this.socketJogador2 = socketJogador2;
+
+    /**
+     * Porta para conexão com o jogador 2.
+     */
+    static final int PORTA2 = 8081;
+
+    /**
+     * Construtor da Thread Worker.
+     *
+     * @param socketJogador1 o Socket de conexão com o jogador 1.
+     */
+    public Worker(Socket socketJogador1) {
+        this.socketJogador1 = socketJogador1;
     }
 
+    /**
+     * Método executado pela thread ao iniciar.
+     * Responsável por receber as configurações de jogo dos jogadores e executar a lógica do jogo.
+     */
     @Override
     public void run() {
-
         try {
+            ObjectInputStream entradaJogador1 = new ObjectInputStream(socketJogador1.getInputStream());
+            ObjectOutputStream saidaJogador1 = new ObjectOutputStream(socketJogador1.getOutputStream());
 
-            ObjectInputStream entradaJogador1 = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream saidaJogador1 = new ObjectOutputStream(socket.getOutputStream());
+            // Recebe o modo de jogo escolhido pelo jogador 1
+            Modo modoJogo = (Modo) entradaJogador1.readObject();
 
-            Modo modoJogo =(Modo) entradaJogador1.readObject();
-
-            if (modoJogo == Modo.JOGADOR_VS_CPU){
-
+            if (modoJogo == Modo.JOGADOR_VS_CPU) {
+                // Modo de jogo: Jogador vs CPU
                 ConfiguracoesJogador configuracoesJogador = (ConfiguracoesJogador) entradaJogador1.readObject();
                 String resultado = jogarCpu(configuracoesJogador);
                 saidaJogador1.writeObject(resultado);
+            } else if (modoJogo == Modo.JOGADOR_Vs_JOGADOR) {
 
-            }else if(modoJogo == Modo.JOGADOR_Vs_JOGADOR){
+                // Modo de jogo: Jogador vs Jogador
+
+                ServerSocket serverSocket2 = new ServerSocket(PORTA2);
+                Socket socketJogador2 = serverSocket2.accept();
+
 
                 ConfiguracoesJogador configuracoesJogador1 = (ConfiguracoesJogador) entradaJogador1.readObject();
 
                 ObjectInputStream entradaJogador2 = new ObjectInputStream(socketJogador2.getInputStream());
                 ObjectOutputStream saidaJogador2 = new ObjectOutputStream(socketJogador2.getOutputStream());
 
+                // Envia a escolha (ímpar ou par) do jogador 1 para o jogador 2
                 saidaJogador2.writeObject(configuracoesJogador1.getImparOuPar());
 
+                // Recebe as configurações de jogo do jogador 2
                 ConfiguracoesJogador configuracoesJogador2 = (ConfiguracoesJogador) entradaJogador2.readObject();
 
-                String resultado = jogarContraJogador(configuracoesJogador1,configuracoesJogador2);
+                String resultado = jogarContraJogador(configuracoesJogador1, configuracoesJogador2);
                 saidaJogador1.writeObject(resultado);
                 saidaJogador2.writeObject(resultado);
-            }
-            else {
+            } else {
+                // Modo de jogo inválido
                 saidaJogador1.writeObject("Modo inválido");
             }
-
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
+
+    /**
+     * Executa a lógica do jogo no modo Jogador vs CPU.
+     *
+     * @param configuracoesJogador as configurações de jogo do jogador.
+     * @return o resultado do jogo.
+     */
     public static String jogarCpu(ConfiguracoesJogador configuracoesJogador) {
 
         Random random = new Random();
@@ -87,6 +114,13 @@ public class Worker extends Thread {
 
     }
 
+    /**
+     * Executa a lógica do jogo no modo Jogador vs Jogador.
+     *
+     * @param configuracoesJogador1 as configurações de jogo do jogador 1.
+     * @param configuracoesJogador2 as configurações de jogo do jogador 2.
+     * @return o resultado do jogo.
+     */
     private String jogarContraJogador(ConfiguracoesJogador configuracoesJogador1, ConfiguracoesJogador configuracoesJogador2) {
 
         int numeroJogador1 = configuracoesJogador1.getNumero();
